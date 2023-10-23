@@ -7,6 +7,7 @@ import comhubcomfy.utilities.ConfigReader;
 import comhubcomfy.utilities.Driver;
 import comhubcomfy.utilities.Extent_Reports;
 import comhubcomfy.utilities.ReusableMethods;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
@@ -16,14 +17,14 @@ import java.io.IOException;
 
 import static comhubcomfy.utilities.Extent_Reports.extentTest;
 
-public class TC06_IncompatiblePasswordVeryWeak {
-    private final String testName = "US01 || TC06-Very Weak Password Message ";
-    private final String description = "Warning message is shown and registration should not completed";
+public class TC08_AcceptablePasswordMedium {
+    private final String testName = "US01 || TC08-Medium Password Message ";
+    private final String description = "Warning message is shown and registration should be completed";
 
     @Test(testName = testName, description = "<span style='font-weight:bold'>Target:</span> " + description)
-    public void unsuccessfulCostumerRegistration() throws IOException {
-        String testCaseNumber = "US01_TC06";
-        String reportMessage = "User did not register and showed 'Very weak - Please enter a stronger password' warning message!";
+    public void successfulCostumerRegistration() throws IOException {
+        String testCaseNumber = "US01_TC08";
+        String reportMessage = "User registered and showed 'Medium' warning message!";
 
         Driver.getDriver().get(ConfigReader.getProperty("URL"));
         extentTest.pass("Homepage is opened");
@@ -40,19 +41,20 @@ public class TC06_IncompatiblePasswordVeryWeak {
         extentTest.pass("Username is entered");
         myAccountPage.emailInputBox.sendKeys(faker.internet().emailAddress());
         extentTest.pass("Email is entered");
-        myAccountPage.passwordInputBox.sendKeys(ConfigReader.getProperty("generatedVeryWeakPassword"));
-        extentTest.pass("*** VERY WEAK PASSWORD IS ENTERED ***");
-
-        Actions actions=new Actions(Driver.getDriver());
-        actions.sendKeys(Keys.PAGE_DOWN).perform();
-        Assert.assertTrue(myAccountPage.veryWeakWarningMessage.isDisplayed());
+        myAccountPage.passwordInputBox.sendKeys(ConfigReader.getProperty("generatedMediumPassword"));
+        extentTest.pass("*** MEDIUM PASSWORD IS ENTERED ***");
+        Assert.assertTrue(myAccountPage.mediumWarningMessage.isDisplayed());
 
         ReusableMethods.jsClick(myAccountPage.privacyPolicy);
         extentTest.pass("Register privacy policy is clicked");
 
-        Assert.assertTrue(myAccountPage.costumerLoginPage.isDisplayed());
+        ReusableMethods.jsClick(myAccountPage.signUpButton);
+        extentTest.pass("Sign up button is clicked");
+
+        Assert.assertTrue(myAccountPage.dashboard.isDisplayed());
+        ReusableMethods.waitFor(1);
         ReusableMethods.getScreenshot(testCaseNumber);
-        extentTest.pass("It is controlled that 'Very weak - Please enter a stronger password' warning message is shown");
+        extentTest.pass("It is controlled that 'Medium' warning message is shown and registration is completed");
 
         Driver.closeDriver();
         Extent_Reports.message =

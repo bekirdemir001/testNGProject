@@ -21,7 +21,7 @@ public class P02_RegisterPage {
     public WebElement passwordInputBox;
 
     @FindBy (id = "register-policy")
-    public WebElement registerPolicy;
+    public WebElement privacyPolicy;
 
     @FindBy (name = "register")
     public WebElement signUpButton;
