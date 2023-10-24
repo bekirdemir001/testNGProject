@@ -14,45 +14,46 @@ import java.io.IOException;
 
 import static comhubcomfy.utilities.Extent_Reports.extentTest;
 
-public class TC11_PasswordBreach {
-    private final String testName = "US01 || TC11-Password with single character";
-    private final String description = "Registration isn't completed by entering password with single character";
+public class TC011_PasswordBreach {
+    String testCaseID = "US01_TC011";
+    private final String testName = "US01 || TC011-User enters single character into password";
+    private final String expectedResult = "User cannot register and showed warning message";
+    String actualResult = "User registered successfully and showed 'Sign Out'";
 
-    @Test(testName = testName, description = "<span style='font-weight:bold'>Target:</span> " + description)
+    @Test(testName = testName, description = "<span style='font-weight:bold'>Expected Result: </span> " + expectedResult)
     public void successfulCustomerRegistration() throws IOException {
-        String testCaseNumber = "US01_TC11";
-        String reportMessage = "User registered and did not show warning message!";
 
         Driver.getDriver().get(ConfigReader.getProperty("URL"));
-        extentTest.pass("Homepage is opened");
+        extentTest.pass("User goes to 'Hubcomfy.com'");
         Faker faker = new Faker();
 
         P01_HomePage homePage = new P01_HomePage();
         homePage.registerButton.click();
-        extentTest.pass("Registration page is opened");
+        extentTest.pass("User clicks on 'Register' button");
 
         P02_RegisterPage registerPage = new P02_RegisterPage();
         registerPage.usernameInputBox.sendKeys(faker.name().username());
-        extentTest.pass("Username is entered");
+        extentTest.pass("User enters valid username");
         registerPage.emailInputBox.sendKeys(faker.internet().emailAddress());
-        extentTest.pass("Email is entered");
+        extentTest.pass("User enters valid email");
+
         registerPage.passwordInputBox.sendKeys(ConfigReader.getProperty("generatedSingleCharacterPassword"));
-        extentTest.pass("Password is entered");
+        extentTest.pass("*** User enters single character into password ***");
+
         registerPage.privacyPolicy.click();
-        extentTest.pass("Privacy policy is clicked");
+        extentTest.pass("User clicks on privacy policy");
         registerPage.signUpButton.click();
-        extentTest.pass("SignUp button is clicked");
-        extentTest.pass("It is controlled that all areas are filled, but password has single character");
+        extentTest.pass("User clicks on 'Sign Up' button");
 
         try {
             Assert.assertFalse(registerPage.signOutButton.isEnabled());
         } catch (AssertionError e) {
             throw e;
         } finally {
-            ReusableMethods.getScreenshot(testCaseNumber);
-            Extent_Reports.message = "<span style='color:red; font-weight:bold; font-size: 16px'>BUG FOUND: &#x1F41E</span>" +
+            ReusableMethods.getScreenshot(testCaseID);
+            Extent_Reports.message = "<span style='color:red; font-weight:bold; font-size: 16px'>Test Result: </span>" +
                     "<br>" +
-                    "<span style='color:purple; font-size: 16px'>" + reportMessage + "</span>";
+                    "<span style='color:purple; font-size: 16px'>" + actualResult + "</span>";
             Driver.closeDriver();
         }
     }

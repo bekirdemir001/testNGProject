@@ -14,43 +14,43 @@ import java.io.IOException;
 
 import static comhubcomfy.utilities.Extent_Reports.extentTest;
 
-public class TC03_EmailBoxBlank {
-    private final String testName = "US01 || TC03-Blank Email";
-    private final String description = "Registration isn't completed without entering email";
+public class TC005_PasswordBlank {
+    String testCaseID = "US01_TC005";
+    private final String testName = "US01 || TC005-User leaves password blank";
+    private final String expectedResult = "User cannot register and show warning message";
+    String actualResult = "User did not register and showed warning message";
 
-    @Test(testName = testName, description = "<span style='font-weight:bold'>Target:</span> " + description)
+    @Test(testName = testName, description = "<span style='font-weight:bold'>Expected Result:</span> " + expectedResult)
     public void unsuccessfulCostumerRegistration() throws IOException {
-        String testCaseNumber = "US01_TC03";
-        String reportMessage = "User did not register and showed alert message!";
 
         Driver.getDriver().get(ConfigReader.getProperty("URL"));
-        extentTest.pass("Homepage is opened");
+        extentTest.pass("User goes to 'Hubcomfy.com'");
         Faker faker = new Faker();
 
         P01_HomePage homePage = new P01_HomePage();
         homePage.registerButton.click();
-        extentTest.pass("Registration page is opened");
+        extentTest.pass("User clicks on 'Register' button");
 
         P02_RegisterPage registerPage = new P02_RegisterPage();
         registerPage.usernameInputBox.sendKeys(faker.name().username());
-        extentTest.pass("Username is entered");
-        extentTest.pass("*** EMAIL IS NOT ENTERED ***");
-        registerPage.passwordInputBox.sendKeys(faker.internet().password());
-        extentTest.pass("Password is entered");
+        extentTest.pass("User enters valid username");
+        registerPage.emailInputBox.sendKeys(faker.internet().emailAddress());
+        extentTest.pass("User enters valid email");
+
+        extentTest.pass("*** User leaves password blank ***");
+
         registerPage.privacyPolicy.click();
-        extentTest.pass("Register privacy policy is clicked");
+        extentTest.pass("User clicks on privacy policy");
         registerPage.signUpButton.click();
-        extentTest.pass("SignUp button is clicked");
+        extentTest.pass("User clicks on 'Sign Up' button");
 
         Assert.assertTrue(registerPage.userRegisterPage.isDisplayed());
-        ReusableMethods.getScreenshot(testCaseNumber);
-        extentTest.pass("It is controlled that all areas are filled except email");
+        ReusableMethods.getScreenshot(testCaseID);
 
-        Driver.closeDriver();
         Extent_Reports.message =
                 "<span style='color:green; font-weight:bold; font-size: 14px'>Test Result: </span>" +
                         "<br>" +
-                        "<span style='color:purple; font-size: 16px'>" + reportMessage + "</span>";
-
+                        "<span style='color:purple; font-size: 16px'>" + actualResult + "</span>";
+        Driver.closeDriver();
     }
 }
