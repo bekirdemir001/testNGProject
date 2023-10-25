@@ -46,8 +46,8 @@ public class Extent_Reports {
             extentReports.setSystemInfo("QA", "Bekir Demir");
 
             // Ekran görüntüleri için klasör oluşturulur
-            File screenshots = new File(System.getProperty("user.dir") + "/reports/screenshots/");
-            screenshots.mkdir();
+            File ekranGoruntuleriKlasoru = new File(System.getProperty("user.dir") + "/src/test/java/reports/screenshots");
+            ekranGoruntuleriKlasoru.mkdir();
         }
     }
     //It runs when test pass

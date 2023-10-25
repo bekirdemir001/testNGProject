@@ -1,17 +1,9 @@
 package comhubcomfy.utilities;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
-
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ExtentReportsListener implements ITestListener {
     //Extent Report is created, when test starts
@@ -39,6 +31,7 @@ public class ExtentReportsListener implements ITestListener {
     //Test fail message and mark are added and screenshot is taken, when test fails
     @Override
     public void onTestFailure(ITestResult result) {
+        //Adding fail message
         String failMark = "&#10060";
         Extent_Reports.extentTestFail("<span style='color:red; font-weight:bold'>Test Failed!  </span> " + failMark);
         Extent_Reports.extentTestFail(Extent_Reports.message);
