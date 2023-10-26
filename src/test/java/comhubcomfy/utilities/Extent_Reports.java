@@ -21,7 +21,7 @@ public class Extent_Reports {
         if (extentTest == null) {
             //Report Path
             String currentDate = new SimpleDateFormat("MMddyyyy_hhmm").format(new Date());
-            String path = System.getProperty("user.dir") + "/reports/HTML_Reports/" + userStory + currentDate + ".html";
+            String path = System.getProperty("user.dir") + "/src/test/java/reports/HTML_Reports" + userStory + currentDate + ".html";
 
             //Creating HTML report in the path
             extentHtmlReporter = new ExtentHtmlReporter(path);
