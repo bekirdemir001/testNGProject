@@ -1,37 +1,34 @@
 package comhubcomfy.tests.us_01;
 
 import com.github.javafaker.Faker;
-import comhubcomfy.pages.P01_HomePage;
-import comhubcomfy.pages.P02_RegisterPage;
+import comhubcomfy.pages.HomePage;
+import comhubcomfy.pages.MyAccountPage;
+import comhubcomfy.pages.RegisterPage;
 import comhubcomfy.utilities.ConfigReader;
 import comhubcomfy.utilities.Driver;
 import comhubcomfy.utilities.Extent_Reports;
-import comhubcomfy.utilities.ReusableMethods;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
-import java.io.IOException;
 
 import static comhubcomfy.utilities.Extent_Reports.extentTest;
 
 public class TC001_ValidData {
-    String testCaseID = "US01_TC001";
     private final String testName = "US01 || TC001-User enters valid data";
     private final String expectedResult = "User registered successfully and showed 'Sign Out'";
     String actualResult = "User registered successfully and showed 'Sign Out'";
 
-   @Test(testName = testName, description = "<span style='font-weight:bold'>Expected Result:</span> " + expectedResult)
-   public void successfulCustomerRegistration() throws IOException {
+   @Test(testName = testName, description = "<span style='color:green; font-weight:bold; font-size: 16px'>Expected Result:</span> " + expectedResult)
+   public void validData(){
 
        Driver.getDriver().get(ConfigReader.getProperty("URL"));
        extentTest.pass("User goes to 'Hubcomfy.com'");
        Faker faker = new Faker();
 
-       P01_HomePage homePage = new P01_HomePage();
+       HomePage homePage = new HomePage();
        homePage.registerButton.click();
        extentTest.pass("User clicks on 'Register' button");
 
-       P02_RegisterPage registerPage = new P02_RegisterPage();
+       RegisterPage registerPage = new RegisterPage();
        registerPage.usernameInputBox.sendKeys(faker.name().username());
        extentTest.pass("User enters valid username");
        registerPage.emailInputBox.sendKeys(faker.internet().emailAddress());
@@ -43,13 +40,17 @@ public class TC001_ValidData {
        registerPage.signUpButton.click();
        extentTest.pass("User clicks on 'Sign Up' button");
 
-       Assert.assertTrue(registerPage.signOutButton.isEnabled());
-       ReusableMethods.getScreenshot(testCaseID);
+       MyAccountPage myAccountPage = new MyAccountPage();
 
-       Extent_Reports.message =
-               "<span style='color:green; font-weight:bold; font-size: 14px'>Test Result: </span>" +
-                       "<br>" +
-                       "<span style='color:purple; font-size: 16px'>" + actualResult + "</span>";
-       Driver.closeDriver();
+       try {
+           Assert.assertTrue(myAccountPage.signOutButton.isEnabled());
+           Driver.closeDriver();
+       }catch (Exception e){
+           throw new RuntimeException();
+       }finally {
+           Extent_Reports.message = "<span style='color:blue; font-weight:bold; font-size: 16px'>Test Result: </span>" +
+                   "<br>" +
+                   "<span style='font-size: 16px'>" + actualResult + "</span>";
+       }
    }
 }

@@ -1,6 +1,7 @@
 package comhubcomfy.utilities;
 
 import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -34,49 +35,32 @@ public class ExtentReportsListener implements ITestListener {
     public void onTestSuccess(ITestResult result) {
         String passMark = "&#9989";
         Extent_Reports.extentTestPass("<span style='color:green; font-weight:bold'>TEST PASSED  </span> " + passMark);
-        Extent_Reports.extentTestPass(Extent_Reports.message);
+        Extent_Reports.extentTestInfo(Extent_Reports.message);
     }
 
     //Test fail message and mark are added and screenshot is taken, when test fails
     @Override
     public void onTestFailure(ITestResult result) {
         //Taking screenshot
-        File goruntu = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.FILE);
-        String currentDate = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-        String path = System.getProperty("user.dir") + "/src/test/java/reports/screenshots/" + currentDate + "image.png";
-        File file = new File(path);
         try {
-            // Ekran görüntüsünü dosyaya kaydetme
-            FileUtils.copyFile(goruntu, file);
+            ReusableMethods.getScreenshot(result.getMethod().getMethodName());
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-
         //Adding fail message
         String failMark = "&#10060";
         Extent_Reports.extentTestFail("<span style='color:red; font-weight:bold'>Test Failed!  </span> " + failMark);
-        Extent_Reports.extentTestFail(Extent_Reports.message);
+        Extent_Reports.extentTestInfo(Extent_Reports.message);
 
-
-        // Raporlama
-       //extentTest.log(Status.FAIL, "Test failed");
-       //try {
-       //    extentTest.addScreenCaptureFromPath(path);
-       //} catch (IOException e) {
-       //    e.printStackTrace();
-       //} finally {
-       //    Driver.closeDriver();
-       //}
         try {
-            //Extent_Reports.extentTest.fail("<span style='color:green; font-weight:bold; font-size: 16px'>EKRAN GÖRÜNTÜSÜ</span><br>(Resmi büyütmek için üzerine tıklayınız.)", MediaEntityBuilder.createScreenCaptureFromPath(path).build());
-            Extent_Reports.extentTest.addScreenCaptureFromPath(path + ".png");
+            Extent_Reports.extentTest.
+                    info("<span style='color:blue; font-weight:bold; font-size: 16px'>Screenshot</span><br>(Click on image to enlarge)<br>",
+                            MediaEntityBuilder.createScreenCaptureFromBase64String(ReusableMethods.base64Screenshot()).build());
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } finally {
+        }finally {
             Driver.closeDriver();
         }
-
-
     }
 
     //Extent Report is closed, when test finishes

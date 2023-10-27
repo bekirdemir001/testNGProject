@@ -26,6 +26,11 @@ public class ReusableMethods {
         return target;
     }
 
+    public static String base64Screenshot(){
+        String base64Screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BASE64);
+        return base64Screenshot;
+    }
+
     public static void jsClick(By locator) {
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));

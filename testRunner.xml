@@ -6,8 +6,8 @@
     </listeners>
     <parameter name="reportTitle" value="TestNG Automation Reports"/>
     <test name="US1_">
-        <classes>
-            <class name="comhubcomfy.tests.us_01.TC006_PasswordVeryWeak"/>
-        </classes>
+        <packages>
+            <package name="comhubcomfy.tests.us_01.*"/>
+        </packages>
     </test>
 </suite>
