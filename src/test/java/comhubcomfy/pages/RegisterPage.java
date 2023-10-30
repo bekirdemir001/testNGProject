@@ -27,7 +27,7 @@ public class RegisterPage {
     @FindBy (name = "register")
     public WebElement signUpButton;
 
-    @FindBy(xpath = "//div[@class='wcfmmp_become_vendor_link']")
+    @FindBy(linkText = "Become a Vendor")
     public WebElement becomeAVendor;
 
 }

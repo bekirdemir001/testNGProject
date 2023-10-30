@@ -10,7 +10,11 @@ public class FakeMailPage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    @FindBy(xpath = "1//*[@class='animace']")
+    @FindBy(xpath = "//*[@class='animace']")
     public WebElement fakeMailAddress;
+
+    @FindBy(id = "predmet")
+    public WebElement fakeMailVerificationCode;
+
 
 }

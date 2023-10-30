@@ -31,6 +31,18 @@ public class ReusableMethods {
         return base64Screenshot;
     }
 
+    //Switching Window
+    public static void switchToWindow(String targetTitle) {
+        String origin = Driver.getDriver().getWindowHandle();
+        for (String w : Driver.getDriver().getWindowHandles()) {
+            Driver.getDriver().switchTo().window(w);
+            if (Driver.getDriver().getTitle().equals(targetTitle)) {
+                return;
+            }
+        }
+        Driver.getDriver().switchTo().window(origin);
+    }
+
     public static void jsClick(By locator) {
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));

@@ -5,9 +5,9 @@
         <listener class-name="comhubcomfy.utilities.ExtentReportsListener"/>
     </listeners>
     <parameter name="reportTitle" value="TestNG Automation Reports"/>
-    <test name="US2_">
-        <classes>
-            <class name="comhubcomfy.tests.us_02.TC012_VendorValidData"/>
-        </classes>
+    <test name="US1_">
+        <packages>
+            <package name="comhubcomfy.tests.us_01.*"/>
+        </packages>
     </test>
 </suite>

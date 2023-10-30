@@ -18,7 +18,7 @@ public class TC006_PasswordVeryWeak {
     String actualResult = "User registered successfully and showed 'Sign Out'";
 
     @Test(testName = testName, description = "<span style='color:green; font-weight:bold; font-size: 16px'>Expected Result:</span> " + expectedResult)
-    public void passwordVeryWek(){
+    public void passwordVeryWeak(){
         Driver.getDriver().get(ConfigReader.getProperty("URL"));
         extentTest.pass("User goes to 'Hubcomfy.com'");
         Faker faker = new Faker();
