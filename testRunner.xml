@@ -8,6 +8,8 @@
     <test name="US2_">
         <classes>
             <class name="comhubcomfy.tests.us_02.TC012_VendorValidData"/>
+            <class name="comhubcomfy.tests.us_02.TC013_VendorUsernameBlank"/>
+            <class name="comhubcomfy.tests.us_02.TC014_VendorVerificationCodeBlank"/>
         </classes>
     </test>
 </suite>
