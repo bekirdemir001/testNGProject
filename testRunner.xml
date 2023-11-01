@@ -1,15 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
     <listeners>
         <listener class-name="comhubcomfy.utilities.ExtentReportsListener"/>
     </listeners>
-    <parameter name="reportTitle" value="TestNG Automation Reports"/>
     <test name="US2_">
         <classes>
-            <class name="comhubcomfy.tests.us_02.TC012_VendorValidData"/>
-            <class name="comhubcomfy.tests.us_02.TC013_VendorUsernameBlank"/>
-            <class name="comhubcomfy.tests.us_02.TC014_VendorVerificationCodeBlank"/>
+            <class name="comhubcomfy.tests.us_01.TC001_ValidData"/>
         </classes>
     </test>
 </suite>

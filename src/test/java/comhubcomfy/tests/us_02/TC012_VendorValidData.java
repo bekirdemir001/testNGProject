@@ -59,7 +59,7 @@ public class TC012_VendorValidData {
 
         Driver.getDriver().switchTo().window(windowsHandle2);
         try {
-            Assert.assertFalse(fakeMailPage.fakeMailVerificationCode.isEnabled());
+            Assert.assertTrue(fakeMailPage.fakeMailVerificationCode.isEnabled());
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -1,7 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
-    <test verbose="2" preserve-order="true" name="C:/Users/Bekir Demir/IdeaProjects/testNGProject/testRunner.xml">
-        <classes/>
+<suite name="All Test Suite" parallel="classes" thread-count="3">
+    <listeners>
+        <listener class-name="comhubcomfy.utilities.ExtentReportsListener"/>
+    </listeners>
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/Bekir Demir/IdeaProjects/testNGProject/src/test/java/comhubcomfy/tests/parallelTest_US01">
+        <classes>
+            <class name="comhubcomfy.tests.parallelTest_US01.TC001_ValidData_ParallelTest">
+                <methods>
+                    <include name="validData"/>
+                </methods>
+            </class>
+            <class name="comhubcomfy.tests.parallelTest_US01.TC002_UsernameBlank_ParallelTest">
+                <methods>
+                    <include name="usernameBlank"/>
+                </methods>
+            </class>
+            <class name="comhubcomfy.tests.parallelTest_US01.TC003_EmailBlank_ParallelTest">
+                <methods>
+                    <include name="emailBlank"/>
+                </methods>
+            </class>
+            <class name="comhubcomfy.tests.parallelTest_US01.TC004_IncompatibleEmail_ParallelTest">
+                <methods>
+                    <include name="incompatibleEmail"/>
+                </methods>
+            </class>
+            <class name="comhubcomfy.tests.parallelTest_US01.TC005_PasswordBlank_ParallelTest">
+                <methods>
+                    <include name="passwordBlank"/>
+                </methods>
+            </class>
+            <class name="comhubcomfy.tests.parallelTest_US01.TC006_PasswordVeryWeak_ParallelTest">
+                <methods>
+                    <include name="passwordVeryWeak"/>
+                </methods>
+            </class>
+            <class name="comhubcomfy.tests.parallelTest_US01.TC007_PasswordWeak">
+                <methods>
+                    <include name="passwordWeak"/>
+                </methods>
+            </class>
+            <class name="comhubcomfy.tests.parallelTest_US01.TC008_PasswordMedium">
+                <methods>
+                    <include name="passwordMedium"/>
+                </methods>
+            </class>
+            <class name="comhubcomfy.tests.parallelTest_US01.TC009_PasswordStrong">
+                <methods>
+                    <include name="passwordStrong"/>
+                </methods>
+            </class>
+            <class name="comhubcomfy.tests.parallelTest_US01.TC010_PrivacyPolicyUnClicked">
+                <methods>
+                    <include name="privacyPolicyUnClicked"/>
+                </methods>
+            </class>
+            <class name="comhubcomfy.tests.parallelTest_US01.TC011_PasswordBreach">
+                <methods>
+                    <include name="passwordBreach"/>
+                </methods>
+            </class>
+        </classes>
     </test>
 </suite>

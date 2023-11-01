@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Suite1" verbose="1" >
     <listeners>
         <listener class-name="comhubcomfy.utilities.ExtentReportsListener"/>
     </listeners>
-    <parameter name="reportTitle" value="TestNG Automation Reports"/>
-    <test name="US1_">
+    <test name="regressionTest"   >
         <packages>
-            <package name="comhubcomfy.tests.us_01.*"/>
+            <package name="comhubcomfy.tests.us_01" />
+            <package name="comhubcomfy.tests.us_02" />
         </packages>
     </test>
 </suite>
