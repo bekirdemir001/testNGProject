@@ -5,7 +5,7 @@
     </listeners>
     <test name="US2_">
         <classes>
-            <class name="comhubcomfy.tests.us_01.TC001_ValidData"/>
+            <class name="comhubcomfy.tests.us_01.TC004_IncompatibleEmail"/>
         </classes>
     </test>
 </suite>

@@ -7,7 +7,9 @@ import comhubcomfy.utilities.ConfigReader;
 import comhubcomfy.utilities.Driver;
 import comhubcomfy.utilities.Extent_Reports;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -30,33 +32,40 @@ public class TC004_IncompatibleEmail_ParallelTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         driver.get(ConfigReader.getProperty("URL"));
 
-        extentTest.pass("User goes to 'Hubcomfy.com'");
+        Extent_Reports.extentTestPass("User goes to 'Hubcomfy.com'");
         Faker faker = new Faker();
 
-        HomePage homePage = new HomePage();
-        homePage.registerButton.click();
-        extentTest.pass("User clicks on 'Register' button");
+        WebElement registerButton = driver.findElement(By.xpath("//a[@href='https://hubcomfy.com/my-account-2/'][2]"));
+        registerButton.click();
+        Extent_Reports.extentTestPass("User clicks on 'Register' button");
 
-        RegisterPage registerPage = new RegisterPage();
-        registerPage.usernameInputBox.sendKeys(faker.name().username());
-        extentTest.pass("User enters valid username");
+        WebElement usernameInputBox = driver.findElement(By.id("reg_username"));
+        usernameInputBox.sendKeys(faker.name().username());
+        Extent_Reports.extentTestPass("User enters valid username");
 
-        registerPage.emailInputBox.sendKeys(ConfigReader.getProperty("generatedIncompatibleEmail"));
-        extentTest.pass("*** User enters incompatible email ***");
+        WebElement emailInputBox = driver.findElement(By.id("reg_email"));
+        emailInputBox.sendKeys(ConfigReader.getProperty("generatedIncompatibleEmail"));
+        Extent_Reports.extentTestPass("*** User enters incompatible email ***");
 
-        registerPage.passwordInputBox.sendKeys(faker.internet().password());
-        extentTest.pass("User enters valid password");
-        registerPage.privacyPolicy.click();
-        extentTest.pass("User clicks on privacy policy");
-        registerPage.signUpButton.click();
-        extentTest.pass("User clicks on 'Sign Up' button");
+        WebElement passwordInputBox = driver.findElement(By.id("reg_password"));
+        passwordInputBox.sendKeys(faker.internet().password());
+        Extent_Reports.extentTestPass("User enters valid password");
+
+        WebElement privacyPolicy = driver.findElement(By.id("register-policy"));
+        privacyPolicy.click();
+        Extent_Reports.extentTestPass("User clicks on privacy policy");
+
+        WebElement signUpButton = driver.findElement(By.name("register"));
+        signUpButton.click();
+        Extent_Reports.extentTestPass("User clicks on 'Sign Up' button");
 
         try {
-            Assert.assertTrue(registerPage.userRegisterPage.isDisplayed());
-            driver.close();
-        }catch (Exception e){
+            WebElement registerPage = driver.findElement(By.id("customer_login"));
+            Assert.assertTrue(registerPage.isEnabled());
+        } catch (Exception e) {
             throw new RuntimeException();
-        }finally {
+        } finally {
+            driver.close();
             Extent_Reports.message = "<span style='color:blue; font-weight:bold; font-size: 16px'>Test Result: </span>" +
                     "<br>" +
                     "<span style='font-size: 16px'>" + actualResult + "</span>";

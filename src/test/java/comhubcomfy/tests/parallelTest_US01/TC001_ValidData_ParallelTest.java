@@ -1,9 +1,6 @@
 package comhubcomfy.tests.parallelTest_US01;
 
 import com.github.javafaker.Faker;
-import comhubcomfy.pages.HomePage;
-import comhubcomfy.pages.MyAccountPage;
-import comhubcomfy.pages.RegisterPage;
 import comhubcomfy.utilities.ConfigReader;
 import comhubcomfy.utilities.Extent_Reports;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -15,8 +12,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-
-import static comhubcomfy.utilities.Extent_Reports.extentTest;
 
 public class TC001_ValidData_ParallelTest {
     private final String testName = "US01 || TC001-User enters valid data";
@@ -30,7 +25,7 @@ public class TC001_ValidData_ParallelTest {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        driver.get("https://hubcomfy.com/");
+        driver.get(ConfigReader.getProperty("URL"));
 
         Extent_Reports.extentTestPass("User goes to 'Hubcomfy.com'");
         Faker faker = new Faker();
@@ -63,10 +58,10 @@ public class TC001_ValidData_ParallelTest {
 
         try {
             Assert.assertTrue(signOutButton.isEnabled());
-            driver.close();
         } catch (Exception e) {
             throw new RuntimeException();
         } finally {
+            driver.close();
             Extent_Reports.message = "<span style='color:blue; font-weight:bold; font-size: 16px'>Test Result: </span>" +
                     "<br>" +
                     "<span style='font-size: 16px'>" + actualResult + "</span>";
