@@ -57,7 +57,6 @@ public class Extent_Reports {
         }
     }
 
-
     //It runs when test fail
     public static void extentTestFail(String message) {
         if (extentTest != null) {
@@ -71,12 +70,10 @@ public class Extent_Reports {
         }
     }
 
-
     //Create Extent Test object for logging
     public static void createExtentTest(String testName, String testDesc) {
         extentTest = extentReports.createTest(testName, testDesc);
     }
-
 
     public static void tearDown() {
         if (extentReports != null) {

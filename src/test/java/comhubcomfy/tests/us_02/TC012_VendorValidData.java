@@ -21,6 +21,7 @@ public class TC012_VendorValidData {
     String actualResult = "Vendor did not get verification code and could not register";
     @Test(testName = testName, description = "<span style='color:green; font-weight:bold; font-size: 16px'>Expected Result: </span> " + expectedResult)
     public void vendorValidData(){
+
         Driver.getDriver().get(ConfigReader.getProperty("URL"));
         extentTest.pass("User goes to 'Hubcomfy.com'");
         Faker faker = new Faker();

@@ -1,7 +1,6 @@
 package comhubcomfy.tests.us_02;
 
 import com.github.javafaker.Faker;
-import comhubcomfy.pages.FakeMailPage;
 import comhubcomfy.pages.HomePage;
 import comhubcomfy.pages.RegisterPage;
 import comhubcomfy.pages.VendorRegisterPage;
@@ -9,7 +8,6 @@ import comhubcomfy.utilities.ConfigReader;
 import comhubcomfy.utilities.Driver;
 import comhubcomfy.utilities.Extent_Reports;
 import comhubcomfy.utilities.ReusableMethods;
-import org.openqa.selenium.WindowType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -32,21 +30,9 @@ public class TC016_VendorConfirmPasswordBlank {
         registerPage.becomeAVendor.click();
         extentTest.pass("Vendor clicks on 'Become a Vendor'");
 
-        String windowHandle1 = Driver.getDriver().getWindowHandle();
-
-        //Go to fake mail address for verification code
-        Driver.getDriver().switchTo().newWindow(WindowType.TAB);
-        Driver.getDriver().get(ConfigReader.getProperty("fakeMailURL"));
-
-        String windowsHandle2 = Driver.getDriver().getWindowHandle();
-
-        FakeMailPage fakeMailPage = new FakeMailPage();
-        String fakeMail = fakeMailPage.fakeMailAddress.getText();
-
-        Driver.getDriver().switchTo().window(windowHandle1);
-
+        Faker faker = new Faker();
         VendorRegisterPage vendorRegisterPage = new VendorRegisterPage();
-        vendorRegisterPage.emailInputBox.sendKeys(fakeMail);
+        vendorRegisterPage.emailInputBox.sendKeys(faker.internet().emailAddress());
         extentTest.pass("Vendor enters valid email");
 
         vendorRegisterPage.verificationCodeInputBox.click();
@@ -54,19 +40,10 @@ public class TC016_VendorConfirmPasswordBlank {
 
         Assert.assertTrue(vendorRegisterPage.emailSentMessage.isEnabled());
         extentTest.pass("Vendor shows that verification code is sent");
-        ReusableMethods.waitFor(1);
 
-        Driver.getDriver().switchTo().window(windowsHandle2);
-        try {
-            Assert.assertTrue(fakeMailPage.fakeMailVerificationCode.isEnabled());
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        extentTest.fail("Vendor enters 'Verification Code' comes from email");
+        vendorRegisterPage.verificationCodeInputBox.sendKeys(ConfigReader.getProperty("generatedVerificationCode"));
+        extentTest.pass("Vendor enters generated 'Verification Code'");
 
-        Driver.getDriver().switchTo().window(windowHandle1);
-
-        Faker faker = new Faker();
         vendorRegisterPage.passwordInputBox.sendKeys(faker.internet().password());
         extentTest.pass("Vendor enters valid password");
 

@@ -4,8 +4,8 @@
         <listener class-name="comhubcomfy.utilities.ExtentReportsListener"/>
     </listeners>
     <test name="US2_">
-        <classes>
-            <class name="comhubcomfy.tests.us_01.TC004_IncompatibleEmail"/>
-        </classes>
+        <packages>
+            <package name="comhubcomfy.tests.us_02.*"/>
+        </packages>
     </test>
 </suite>

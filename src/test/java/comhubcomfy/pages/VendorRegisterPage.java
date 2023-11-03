@@ -31,7 +31,7 @@ public class VendorRegisterPage {
     @FindBy(id = "confirm_pwd")
     public WebElement confirmPasswordInputBox;
 
-    @FindBy(xpath = "//div[@class='wcfm-message']")
+    @FindBy(xpath = "//div[@class='wcfm-message wcfm-error']")
     public WebElement registrationWarningMessage;
 
     @FindBy(id = "wcfm_membership_register_button")

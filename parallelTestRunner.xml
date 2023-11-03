@@ -1,12 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Parallel Test Suite" parallel="classes" thread-count="3">
     <test name="Parallel Test">
-        <classes>
-            <class name="comhubcomfy.tests.parallelTest_US01.TC001_ValidData_ParallelTest"/>
-            <class name="comhubcomfy.tests.parallelTest_US01.TC002_UsernameBlank_ParallelTest"/>
-            <class name="comhubcomfy.tests.parallelTest_US01.TC003_EmailBlank_ParallelTest"/>
-            <class name="comhubcomfy.tests.parallelTest_US01.TC004_IncompatibleEmail_ParallelTest"/>
-            <class name="comhubcomfy.tests.parallelTest_US01.TC005_PasswordBlank_ParallelTest"/>
-        </classes>
+        <packages>
+            <package name="comhubcomfy.tests.parallelTest.*"/>
+        </packages>
     </test>
 </suite>
