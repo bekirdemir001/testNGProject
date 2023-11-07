@@ -1,12 +1,13 @@
 package comhubcomfy.tests.us_01;
 
 import com.github.javafaker.Faker;
-import comhubcomfy.pages.HomePage;
-import comhubcomfy.pages.MyAccountPage;
-import comhubcomfy.pages.RegisterPage;
+import comhubcomfy.pages.P01_HomePage;
+import comhubcomfy.pages.P02_UserRegisterPage;
+import comhubcomfy.pages.P03_MyAccountPage;
 import comhubcomfy.utilities.ConfigReader;
 import comhubcomfy.utilities.Driver;
 import comhubcomfy.utilities.Extent_Reports;
+import comhubcomfy.utilities.ReusableMethods;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,37 +16,41 @@ import static comhubcomfy.utilities.Extent_Reports.extentTest;
 public class TC007_PasswordWeak {
     private final String testName = "US01 || TC007-User enters weak password";
     private final String expectedResult = "'Sign Up' button isn't clickable and user cannot register";
-    String actualResult = "User registered successfully and showed 'Sign Out'";
+    String actualResult = "'Sign Up' button isn't clickable and user couldn't register";
 
     @Test(testName = testName, description = "<span style='color:green; font-weight:bold; font-size: 16px'>Expected Result: </span> " + expectedResult)
     public void passwordWeak(){
-
-        Driver.getDriver().get(ConfigReader.getProperty("URL"));
-        extentTest.pass("User goes to 'Hubcomfy.com'");
+        P01_HomePage homePage = new P01_HomePage();
+        P02_UserRegisterPage userRegisterPage = new P02_UserRegisterPage();
+        P03_MyAccountPage myAccountPage = new P03_MyAccountPage();
         Faker faker = new Faker();
 
-        HomePage homePage = new HomePage();
-        homePage.registerButton.click();
-        extentTest.pass("User clicks on 'Register' button");
+        Driver.getDriver().get(ConfigReader.getProperty("URL"));
+        extentTest.pass("1) User goes to homepage");
 
-        RegisterPage registerPage = new RegisterPage();
-        registerPage.usernameInputBox.sendKeys(faker.name().username());
-        extentTest.pass("User enters valid username");
-        registerPage.emailInputBox.sendKeys(faker.internet().emailAddress());
-        extentTest.pass("User enters valid email");
+        ReusableMethods.jsClick(homePage.myAccountButton);
+        extentTest.pass("2) User clicks on 'My Account' button");
 
-        registerPage.passwordInputBox.sendKeys(ConfigReader.getProperty("generatedWeakPassword"));
-        extentTest.pass("*** User enters weak password ***");
+        myAccountPage.signUpButton.click();
+        extentTest.pass("3) Vendor clicks on 'Sign Up' button");
 
-        registerPage.privacyPolicy.click();
-        extentTest.pass("User clicks on privacy policy");
-        registerPage.signUpButton.click();
-        extentTest.pass("User clicks on 'Sign Up' button");
+        userRegisterPage.usernameInputBox.sendKeys(faker.name().username());
+        extentTest.pass("4) User enters valid username");
 
-        MyAccountPage myAccountPage = new MyAccountPage();
+        userRegisterPage.emailInputBox.sendKeys(faker.internet().emailAddress());
+        extentTest.pass("5) User enters valid email");
+
+        userRegisterPage.passwordInputBox.sendKeys(ConfigReader.getProperty("generatedWeakPassword"));
+        extentTest.pass("6) *** User enters weak password ***");
+
+        ReusableMethods.jsClick(userRegisterPage.privacyPolicy);
+        extentTest.pass("7) User clicks on privacy policy");
+
+        ReusableMethods.jsClick(userRegisterPage.signUpButton);
+        extentTest.pass("8) User clicks on 'Sign Up' button");
 
         try {
-            Assert.assertFalse(myAccountPage.signOutButton.isEnabled());
+            Assert.assertTrue(userRegisterPage.userRegisterPage.isDisplayed());
             Driver.closeDriver();
         }catch (Exception e){
             throw new RuntimeException();

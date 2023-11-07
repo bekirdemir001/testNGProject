@@ -40,7 +40,7 @@ public class Extent_Reports {
             //Customizing The Report
             extentReports.setSystemInfo("Project", "TestNG_Project");
             extentReports.setSystemInfo("Test Environment", "Regression");
-            extentReports.setSystemInfo("Application", "Hubcomfy.com");
+            extentReports.setSystemInfo("Application", "Allover Commerce");
             extentReports.setSystemInfo("Browser", "Chrome");
             extentReports.setSystemInfo("Team", "Test Team");
             extentReports.setSystemInfo("QA", "Bekir Demir");

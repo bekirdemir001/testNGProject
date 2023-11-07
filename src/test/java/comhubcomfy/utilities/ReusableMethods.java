@@ -9,7 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ReusableMethods {
     public static String getScreenshot(String userStory) throws IOException {
@@ -41,6 +43,11 @@ public class ReusableMethods {
             }
         }
         Driver.getDriver().switchTo().window(origin);
+    }
+
+    public static void switchToWindow(int windowNumber) {
+        List<String> list = new ArrayList<>(Driver.getDriver().getWindowHandles());
+        Driver.getDriver().switchTo().window(list.get(windowNumber));
     }
 
     public static void jsClick(By locator) {

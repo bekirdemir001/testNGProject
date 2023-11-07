@@ -13,13 +13,13 @@ import org.testng.annotations.Test;
 
 import static comhubcomfy.utilities.Extent_Reports.extentTest;
 
-public class TC006_PasswordVeryWeak {
-    private final String testName = "US01 || TC006-User enters very weak password";
-    private final String expectedResult = "'Sign Up' button isn't clickable and user cannot register";
-    String actualResult = "'Sign Up' button isn't clickable and user couldn't register";
+public class TC010_UsernameWithSymbol {
+    private final String testName = "US01 || TC010-User enters username with symbol";
+    private final String expectedResult = "User cannot register and showed warning message";
+    String actualResult = "User couldn't register and showed warning message";
 
-    @Test(testName = testName, description = "<span style='color:green; font-weight:bold; font-size: 16px'>Expected Result:</span> " + expectedResult)
-    public void passwordVeryWeak(){
+    @Test(testName = testName, description = "<span style='color:green; font-weight:bold; font-size: 16px'>Expected Result: </span> " + expectedResult)
+    public void usernameWithSymbol(){
         P01_HomePage homePage = new P01_HomePage();
         P02_UserRegisterPage userRegisterPage = new P02_UserRegisterPage();
         P03_MyAccountPage myAccountPage = new P03_MyAccountPage();
@@ -34,14 +34,14 @@ public class TC006_PasswordVeryWeak {
         myAccountPage.signUpButton.click();
         extentTest.pass("3) Vendor clicks on 'Sign Up' button");
 
-        userRegisterPage.usernameInputBox.sendKeys(faker.name().username());
-        extentTest.pass("4) User enters valid username");
+        userRegisterPage.usernameInputBox.sendKeys(ConfigReader.getProperty("generatedUsernameWithSymbol"));
+        extentTest.pass("4) *** User enters username with symbol ***");
 
         userRegisterPage.emailInputBox.sendKeys(faker.internet().emailAddress());
         extentTest.pass("5) User enters valid email");
 
-        userRegisterPage.passwordInputBox.sendKeys(ConfigReader.getProperty("generatedVeryWeakPassword"));
-        extentTest.pass("6) *** User enters very weak password ***");
+        userRegisterPage.passwordInputBox.sendKeys(faker.internet().password());
+        extentTest.pass("6) User enters valid password");
 
         ReusableMethods.jsClick(userRegisterPage.privacyPolicy);
         extentTest.pass("7) User clicks on privacy policy");

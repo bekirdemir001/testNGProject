@@ -13,8 +13,7 @@ public class FakeMailPage {
     @FindBy(xpath = "//*[@class='animace']")
     public WebElement fakeMailAddress;
 
-    @FindBy(id = "predmet")
-    public WebElement fakeMailVerificationCode;
-
+    @FindBy(xpath = "//tr[@class='hidden-xs hidden-sm klikaciRadek newMail']//td[2]")
+    public WebElement verificationCodeEMail;
 
 }

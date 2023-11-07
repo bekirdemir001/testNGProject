@@ -14,13 +14,13 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class TC004_IncompatibleEmail_ParallelTest {
-    private final String testName = "US01 || TC004-User enters incompatible email";
+public class TC009_PrivacyPolicyUnClicked_ParallelTest {
+    private final String testName = "US01 || TC009-User does not click on privacy policy";
     private final String expectedResult = "User cannot register and show warning message";
     String actualResult = "User couldn't register and showed warning message";
 
-    @Test(testName = testName, description = "<span style='color:green; font-weight:bold; font-size: 16px'>Expected Result:</span> " + expectedResult)
-    public void incompatibleEmail(){
+    @Test(testName = testName, description = "<span style='color:green; font-weight:bold; font-size: 16px'>Expected Result: </span> " + expectedResult)
+    public void privacyPolicyUnClicked(){
         Faker faker = new Faker();
 
         WebDriverManager.chromedriver().setup();
@@ -44,16 +44,14 @@ public class TC004_IncompatibleEmail_ParallelTest {
         Extent_Reports.extentTestPass("4) User enters valid username");
 
         WebElement emailInputBox = driver.findElement(By.id("reg_email"));
-        emailInputBox.sendKeys(ConfigReader.getProperty("generatedIncompatibleEmail"));
-        Extent_Reports.extentTestPass("5) *** User enters incompatible email ***");
+        emailInputBox.sendKeys(faker.internet().emailAddress());
+        Extent_Reports.extentTestPass("5) User enters valid email");
 
         WebElement passwordInputBox = driver.findElement(By.id("reg_password"));
         passwordInputBox.sendKeys(faker.internet().password());
         Extent_Reports.extentTestPass("6) User enters valid password");
 
-        WebElement privacyPolicy = driver.findElement(By.id("register-policy"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", privacyPolicy);
-        Extent_Reports.extentTestPass("7) User clicks on privacy policy");
+        Extent_Reports.extentTestPass("7) *** User does not click on privacy policy ***");
 
         WebElement signUpButton = driver.findElement(By.name("register"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", signUpButton);

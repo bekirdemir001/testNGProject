@@ -13,13 +13,13 @@ import org.testng.annotations.Test;
 
 import static comhubcomfy.utilities.Extent_Reports.extentTest;
 
-public class TC006_PasswordVeryWeak {
-    private final String testName = "US01 || TC006-User enters very weak password";
-    private final String expectedResult = "'Sign Up' button isn't clickable and user cannot register";
-    String actualResult = "'Sign Up' button isn't clickable and user couldn't register";
+public class TC009_PrivacyPolicyUnClicked {
+    private final String testName = "US01 || TC009-User does not click on privacy policy";
+    private final String expectedResult = "User cannot register and show warning message";
+    String actualResult = "User couldn't register and showed warning message";
 
-    @Test(testName = testName, description = "<span style='color:green; font-weight:bold; font-size: 16px'>Expected Result:</span> " + expectedResult)
-    public void passwordVeryWeak(){
+    @Test(testName = testName, description = "<span style='color:green; font-weight:bold; font-size: 16px'>Expected Result: </span> " + expectedResult)
+    public void privacyPolicyUnClicked(){
         P01_HomePage homePage = new P01_HomePage();
         P02_UserRegisterPage userRegisterPage = new P02_UserRegisterPage();
         P03_MyAccountPage myAccountPage = new P03_MyAccountPage();
@@ -29,7 +29,7 @@ public class TC006_PasswordVeryWeak {
         extentTest.pass("1) User goes to homepage");
 
         ReusableMethods.jsClick(homePage.myAccountButton);
-        extentTest.pass("2) User clicks on 'My Account' button");
+        extentTest.pass("2) User clicks on 'Register' button");
 
         myAccountPage.signUpButton.click();
         extentTest.pass("3) Vendor clicks on 'Sign Up' button");
@@ -40,11 +40,10 @@ public class TC006_PasswordVeryWeak {
         userRegisterPage.emailInputBox.sendKeys(faker.internet().emailAddress());
         extentTest.pass("5) User enters valid email");
 
-        userRegisterPage.passwordInputBox.sendKeys(ConfigReader.getProperty("generatedVeryWeakPassword"));
-        extentTest.pass("6) *** User enters very weak password ***");
+        userRegisterPage.passwordInputBox.sendKeys(faker.internet().password());
+        extentTest.pass("6) User enters valid password");
 
-        ReusableMethods.jsClick(userRegisterPage.privacyPolicy);
-        extentTest.pass("7) User clicks on privacy policy");
+        extentTest.pass("7) *** User does not click on privacy policy ***");
 
         ReusableMethods.jsClick(userRegisterPage.signUpButton);
         extentTest.pass("8) User clicks on 'Sign Up' button");

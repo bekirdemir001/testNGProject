@@ -2,6 +2,7 @@ package comhubcomfy.tests.parallelTest;
 
 import com.github.javafaker.Faker;
 import comhubcomfy.utilities.ConfigReader;
+import comhubcomfy.utilities.Driver;
 import comhubcomfy.utilities.Extent_Reports;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
@@ -14,13 +15,13 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class TC004_IncompatibleEmail_ParallelTest {
-    private final String testName = "US01 || TC004-User enters incompatible email";
-    private final String expectedResult = "User cannot register and show warning message";
+public class TC010_UsernameWithSymbol_ParallelTest {
+    private final String testName = "US01 || TC010-User enters username with symbol";
+    private final String expectedResult = "User cannot register and showed warning message";
     String actualResult = "User couldn't register and showed warning message";
 
-    @Test(testName = testName, description = "<span style='color:green; font-weight:bold; font-size: 16px'>Expected Result:</span> " + expectedResult)
-    public void incompatibleEmail(){
+    @Test(testName = testName, description = "<span style='color:green; font-weight:bold; font-size: 16px'>Expected Result: </span> " + expectedResult)
+    public void usernameWithSymbol(){
         Faker faker = new Faker();
 
         WebDriverManager.chromedriver().setup();
@@ -40,12 +41,12 @@ public class TC004_IncompatibleEmail_ParallelTest {
         Extent_Reports.extentTestPass("3) User clicks on 'Sign Up' button");
 
         WebElement usernameInputBox = driver.findElement(By.id("reg_username"));
-        usernameInputBox.sendKeys(faker.name().username());
-        Extent_Reports.extentTestPass("4) User enters valid username");
+        usernameInputBox.sendKeys(ConfigReader.getProperty("generatedSingleCharacterPassword"));
+        Extent_Reports.extentTestPass("4) *** User enters username with symbol ***");
 
         WebElement emailInputBox = driver.findElement(By.id("reg_email"));
-        emailInputBox.sendKeys(ConfigReader.getProperty("generatedIncompatibleEmail"));
-        Extent_Reports.extentTestPass("5) *** User enters incompatible email ***");
+        emailInputBox.sendKeys(faker.internet().emailAddress());
+        Extent_Reports.extentTestPass("5) User enters valid email");
 
         WebElement passwordInputBox = driver.findElement(By.id("reg_password"));
         passwordInputBox.sendKeys(faker.internet().password());
