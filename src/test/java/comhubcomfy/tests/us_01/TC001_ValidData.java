@@ -50,7 +50,7 @@ public class TC001_ValidData {
        extentTest.pass("8) User clicks on 'Sign Up' button");
 
        try {
-           Assert.assertTrue(myAccountPage.myAccountText.isDisplayed());
+           Assert.assertTrue(myAccountPage.dashboard.isDisplayed());
            Driver.closeDriver();
        }catch (Exception e){
            throw new RuntimeException();

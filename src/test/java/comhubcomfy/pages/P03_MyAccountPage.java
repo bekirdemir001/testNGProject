@@ -12,7 +12,10 @@ public class P03_MyAccountPage {
 
     @FindBy(xpath = "//a[text()='Sign Up']")
     public WebElement signUpButton;
-    @FindBy (xpath = "//a[text()='My Account']")
-    public WebElement myAccountText;
 
+    @FindBy(xpath = "//a[text()='Dashboard']")
+    public WebElement dashboard;
+
+    @FindBy(xpath = "//a[text()='Logout']")
+    public WebElement logout;
 }

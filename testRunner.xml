@@ -3,9 +3,9 @@
     <listeners>
         <listener class-name="comhubcomfy.utilities.ExtentReportsListener"/>
     </listeners>
-    <test name="US2_">
-        <classes>
-            <class name="comhubcomfy.tests.us_01.TC008_PasswordMedium"/>
-        </classes>
+    <test name="US3_">
+        <packages>
+            <package name="comhubcomfy.tests.us_03.*"/>
+        </packages>
     </test>
 </suite>

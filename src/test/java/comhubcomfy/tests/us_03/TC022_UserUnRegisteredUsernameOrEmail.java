@@ -1,7 +1,7 @@
 package comhubcomfy.tests.us_03;
 
+import com.github.javafaker.Faker;
 import comhubcomfy.pages.P01_HomePage;
-import comhubcomfy.pages.P03_MyAccountPage;
 import comhubcomfy.pages.P06_SignInPage;
 import comhubcomfy.utilities.ConfigReader;
 import comhubcomfy.utilities.Driver;
@@ -12,16 +12,16 @@ import org.testng.annotations.Test;
 
 import static comhubcomfy.utilities.Extent_Reports.extentTest;
 
-public class TC021_UserRegisteredData {
-    private final String testName = "US03 || TC021-User enters registered information";
-    private final String expectedResult = "User can sign in successfully and show 'Dashboard'";
-    String actualResult = "User signed in successfully and showed 'Dashboard'";
+public class TC022_UserUnRegisteredUsernameOrEmail {
+    private final String testName = "US03 || TC022-User enters unregistered username or email";
+    private final String expectedResult = "User cannot sign in and show 'Wrong username or password.' warning message";
+    String actualResult = "User couldn't sign in and showed 'Wrong username or password.' warning message";
 
     @Test(testName = testName, description = "<span style='color:green; font-weight:bold; font-size: 16px'>Expected Result: </span> " + expectedResult)
-    public void userRegisteredData(){
+    public void userUnRegisteredUsernameOrEmail(){
         P01_HomePage homePage = new P01_HomePage();
         P06_SignInPage signInPage = new P06_SignInPage();
-        P03_MyAccountPage myAccountPage = new P03_MyAccountPage();
+        Faker faker = new Faker();
 
         Driver.getDriver().get(ConfigReader.getProperty("URL"));
         extentTest.pass("1) User goes to homepage");
@@ -29,8 +29,8 @@ public class TC021_UserRegisteredData {
         ReusableMethods.jsClick(homePage.myAccountButton);
         extentTest.pass("2) User clicks on 'My Account' button");
 
-        signInPage.usernameOrEmailAddressInputBox.sendKeys(ConfigReader.getProperty("generatedUserUsername"));
-        extentTest.pass("3) User enters registered username or email address");
+        signInPage.usernameOrEmailAddressInputBox.sendKeys(faker.internet().emailAddress());
+        extentTest.pass("3) *** User enters unregistered username or email address ***");
 
         signInPage.passwordInputBox.sendKeys(ConfigReader.getProperty("generatedUserPassword"));
         extentTest.pass("4) User enters registered password");
@@ -39,7 +39,7 @@ public class TC021_UserRegisteredData {
         extentTest.pass("5) User clicks on 'Sign In' button");
 
         try {
-            Assert.assertTrue(myAccountPage.dashboard.isDisplayed());
+            Assert.assertTrue(signInPage.warningMessage.isDisplayed());
             Driver.closeDriver();
         }catch (Exception e){
             throw new RuntimeException();
