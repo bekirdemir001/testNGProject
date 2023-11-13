@@ -2,7 +2,7 @@
 <suite name="Parallel Test Suite" parallel="classes" thread-count="3">
     <test name="Parallel Test">
         <packages>
-            <package name="comhubcomfy.tests.parallelTest.*"/>
+            <package name="comAlloverCommerce.tests.parallelTest.*"/>
         </packages>
     </test>
 </suite>

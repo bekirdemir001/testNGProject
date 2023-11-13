@@ -1,11 +1,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
     <listeners>
-        <listener class-name="comhubcomfy.utilities.ExtentReportsListener"/>
+        <listener class-name="comAlloverCommerce.utilities.ExtentReportsListener"/>
     </listeners>
-    <test name="US3_">
+    <test name="US4_">
         <packages>
-            <package name="comhubcomfy.tests.us_03.*"/>
+            <package name="comAlloverCommerce.tests.us_04.*"/>
         </packages>
     </test>
 </suite>
