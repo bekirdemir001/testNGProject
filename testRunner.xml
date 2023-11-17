@@ -3,9 +3,9 @@
     <listeners>
         <listener class-name="comAlloverCommerce.utilities.ExtentReportsListener"/>
     </listeners>
-    <test name="US4_">
-        <packages>
-            <package name="comAlloverCommerce.tests.us_04.*"/>
-        </packages>
+    <test name="US5_">
+        <classes>
+            <class name="comAlloverCommerce.tests.us_05.TC033_UserRegisteredUsername"/>
+        </classes>
     </test>
 </suite>

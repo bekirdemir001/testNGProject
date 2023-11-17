@@ -26,4 +26,7 @@ public class P06_SignInPage {
     @FindBy(xpath = "//p[text()='Wrong username or password.']")
     public WebElement warningMessage;
 
+    @FindBy(linkText = "Lost your password?")
+    public WebElement lostYourPassword;
+
 }

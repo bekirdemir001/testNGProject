@@ -18,4 +18,7 @@ public class P03_MyAccountPage {
 
     @FindBy(xpath = "//a[text()='Logout']")
     public WebElement logout;
+
+    @FindBy(xpath = "//div[@role='alert']")
+    public WebElement resetPasswordSuccessfulMessage;
 }

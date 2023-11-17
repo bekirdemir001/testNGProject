@@ -60,12 +60,14 @@ public class TC011_VendorValidData {
         ReusableMethods.waitFor(10);
 
         String verificationCodeMessage = fakeMailPage.verificationCodeEMail.getText();
-        String[] verificationCode = verificationCodeMessage.split(" ");
 
         ReusableMethods.switchToWindow(0);
 
-        vendorRegisterPage.verificationCodeInputBox.sendKeys(verificationCode[6]);
+        vendorRegisterPage.verificationCodeInputBox.
+                sendKeys(verificationCodeMessage.substring(verificationCodeMessage.length()-6));
         extentTest.pass("7) Vendor enters 'Verification Code' comes from email");
+
+        ReusableMethods.waitFor(5);
 
         String psw = faker.internet().password();
         vendorRegisterPage.passwordInputBox.sendKeys(psw);

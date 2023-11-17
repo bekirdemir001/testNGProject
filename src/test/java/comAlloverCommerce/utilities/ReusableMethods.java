@@ -95,4 +95,10 @@ public class ReusableMethods {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
+    public static String getValueByJS(String idOfElement){
+        JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
+        String text = jse.executeScript("return document.getElementById('"+idOfElement+"').value").toString();
+        return text;
+    }
+
 }

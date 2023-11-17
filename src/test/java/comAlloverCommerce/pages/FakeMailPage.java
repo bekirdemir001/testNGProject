@@ -16,4 +16,10 @@ public class FakeMailPage {
     @FindBy(xpath = "//tr[@class='hidden-xs hidden-sm klikaciRadek newMail']//td[2]")
     public WebElement verificationCodeEMail;
 
+    @FindBy(xpath = "//tbody[@id='schranka']//tr[1]")
+    public WebElement resetEmail;
+
+    @FindBy(xpath = "//div[@id='body_content_inner']//p[5]")
+    public WebElement resetPasswordLink;
+
 }
