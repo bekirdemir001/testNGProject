@@ -4,8 +4,8 @@
         <listener class-name="comAlloverCommerce.utilities.ExtentReportsListener"/>
     </listeners>
     <test name="US5_">
-        <classes>
-            <class name="comAlloverCommerce.tests.us_05.TC033_UserRegisteredUsername"/>
-        </classes>
+        <packages>
+            <package name="comAlloverCommerce.tests.us_05.*"/>
+        </packages>
     </test>
 </suite>

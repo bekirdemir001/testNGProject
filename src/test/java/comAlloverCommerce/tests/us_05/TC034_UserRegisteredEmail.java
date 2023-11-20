@@ -12,20 +12,20 @@ import org.testng.annotations.Test;
 
 import static comAlloverCommerce.utilities.Extent_Reports.extentTest;
 
-public class TC033_UserRegisteredUsername {
-    private final String testName = "US03 || TC033-User enters registered username";
+public class TC034_UserRegisteredEmail {
+    private final String testName = "US03 || TC034-User enters registered email address";
     private final String expectedResult = "User can reset his/her password and show 'Your password has been reset successfully.' warning message";
     String actualResult = "User can reset his/her password and show 'Your password has been reset successfully.' warning message";
 
     @Test(testName = testName, description = "<span style='color:green; font-weight:bold; font-size: 16px'>Expected Result: </span> " + expectedResult)
-    public void userRegisteredUsername(){
+    public void userRegisteredEmail(){
         P06_SignInPage signInPage = new P06_SignInPage();
         P07_LostPassword lostPassword = new P07_LostPassword();
         FakeMailPage2 fakeMailPage2 = new FakeMailPage2();
         P03_MyAccountPage myAccountPage = new P03_MyAccountPage();
         Faker faker = new Faker();
 
-        String username = register();
+        String email = register();
 
         extentTest.pass("1) User goes to homepage");
 
@@ -34,7 +34,7 @@ public class TC033_UserRegisteredUsername {
         ReusableMethods.jsClick(signInPage.lostYourPassword);
         extentTest.pass("3) User clicks on 'Lost your password?' button");
 
-        lostPassword.usernameOrEmailInputBox.sendKeys(username);
+        lostPassword.usernameOrEmailInputBox.sendKeys(email);
         extentTest.pass("4) User enters registered username");
 
         lostPassword.resetPasswordButton.click();
@@ -46,7 +46,7 @@ public class TC033_UserRegisteredUsername {
         extentTest.pass("6) User asserts that 'Password reset email has been sent.' message is shown");
 
         ReusableMethods.switchToWindow(1);
-        ReusableMethods.waitFor(20);
+        ReusableMethods.waitFor(10);
 
         ReusableMethods.jsClick(fakeMailPage2.resetMail);
         ReusableMethods.waitFor(3);
@@ -114,6 +114,6 @@ public class TC033_UserRegisteredUsername {
 
         ReusableMethods.jsClick(myAccountPage.logout);
 
-        return username;
+        return email;
     }
 }

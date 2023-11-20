@@ -28,4 +28,7 @@ public class P07_LostPassword {
 
     @FindBy(xpath = "//button[@class='woocommerce-Button button']")
     public WebElement saveButton;
+
+    @FindBy(xpath = "//li[@class=' alert alert-simple alert-icon alert-close-top alert-danger']")
+    public WebElement lostPasswordWarningMessage;
 }
