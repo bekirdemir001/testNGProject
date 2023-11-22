@@ -48,7 +48,7 @@ public class TC033_UserRegisteredUsername {
         ReusableMethods.switchToWindow(1);
         ReusableMethods.waitFor(20);
 
-        ReusableMethods.jsClick(fakeMailPage2.resetMail);
+        ReusableMethods.jsClick(fakeMailPage2.firstMail);
         ReusableMethods.waitFor(3);
 
         Driver.getDriver().switchTo().frame("iframe");

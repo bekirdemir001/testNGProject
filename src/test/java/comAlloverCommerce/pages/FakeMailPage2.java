@@ -10,13 +10,16 @@ public class FakeMailPage2 {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    @FindBy(id = "eposta_adres")
-    public WebElement emailText;
-
     @FindBy(xpath = "//ul[@class='mailler']//li[2]//a")
-    public WebElement resetMail;
+    public WebElement firstMail;
 
     @FindBy(xpath = "//a[@class='link']")
     public WebElement resetPasswordLink;
+
+    @FindBy(xpath = "//div[@id='body_content_inner']//p[2]")
+    public WebElement verificationCode;
+
+    @FindBy(xpath = "//div[@class='mail-oku-menu']//a")
+    public WebElement backButton;
 
 }

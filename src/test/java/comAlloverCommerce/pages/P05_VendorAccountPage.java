@@ -13,4 +13,10 @@ public class P05_VendorAccountPage {
     @FindBy(xpath = "//h1[.='Welcome to Allover Commerce!']")
     public WebElement vendorAccountText;
 
+    @FindBy(xpath = "//*[.='Not right now']")
+    public WebElement notRightNowButton;
+
+    @FindBy(xpath = "//a[@class='wcfm_menu_item']")
+    public WebElement logoutButton;
+
 }
